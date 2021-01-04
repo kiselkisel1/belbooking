@@ -12,11 +12,6 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-import java.util.ArrayList;
-import java.util.List;
-
 @ControllerAdvice
 public class ControllerAdvise {
     private static final Logger logger = LoggerFactory.getLogger(ControllerAdvise.class);
@@ -56,15 +51,15 @@ public class ControllerAdvise {
         return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
     }
 
-    @ExceptionHandler({ConstraintViolationException.class})
-    public ResponseEntity<Object> handleConstraintViolation(ConstraintViolationException ex, WebRequest request) {
-        List<String> errors = new ArrayList<String>();
-        for (ConstraintViolation<?> violation : ex.getConstraintViolations()) {
-            errors.add(violation.getRootBeanClass().getName() + " " + violation.getPropertyPath() + ": " + violation.getMessage());
-        }
-        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), errors);
-        return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
-    }
+//    @ExceptionHandler({ConstraintViolationException.class})
+//    public ResponseEntity<Object> handleConstraintViolation(ConstraintViolationException ex, WebRequest request) {
+//        List<String> errors = new ArrayList<String>();
+//        for (ConstraintViolation<?> violation : ex.getConstraintViolations()) {
+//            errors.add(violation.getRootBeanClass().getName() + " " + violation.getPropertyPath() + ": " + violation.getMessage());
+//        }
+//        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), errors);
+//        return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
+//    }
 
     @ExceptionHandler({MissingServletRequestParameterException.class})
     protected ResponseEntity<Object> handleMissingServletRequestParameter(

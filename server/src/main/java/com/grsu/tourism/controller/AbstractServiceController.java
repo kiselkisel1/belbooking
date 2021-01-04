@@ -5,7 +5,8 @@ import com.grsu.tourism.exception.ApiError;
 import com.grsu.tourism.factory.ServiceFactory;
 import com.grsu.tourism.model.AbstractService;
 import com.grsu.tourism.service.GenericService;
-import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -18,11 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @AllArgsConstructor
+@Api(tags = "Services")
 public abstract class AbstractServiceController<S extends AbstractService> {
     private final ServiceFactory<S> serviceFactory;
 
     @PostMapping("/add")
-    @Operation(summary = "Add service")
+    @ApiOperation(value = "This method is used to get the clients.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Item found", content =
             @Content(schema = @Schema(implementation = AbstractService.class), mediaType = MediaType.APPLICATION_JSON_VALUE)),

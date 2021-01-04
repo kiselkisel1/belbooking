@@ -20,7 +20,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     runtimeOnly 'mysql:mysql-connector-java'
     compile group: 'com.google.guava', name: 'guava', version: '11.0.2'
-    compile 'org.springdoc:springdoc-openapi-ui:1.5.0'
+//    compile 'org.springdoc:springdoc-openapi-ui:1.5.0'
+    compile group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
     compileOnly 'org.projectlombok:lombok:1.18.12'
 
     annotationProcessor 'org.projectlombok:lombok:1.18.12'

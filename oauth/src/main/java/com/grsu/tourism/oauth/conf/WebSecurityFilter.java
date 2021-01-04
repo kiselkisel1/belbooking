@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -18,10 +19,26 @@ import static com.grsu.tourism.oauth.utils.SecurityConstants.SIGN_UP_URL;
 
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class WebSecurity extends WebSecurityConfigurerAdapter {
+public class WebSecurityFilter extends WebSecurityConfigurerAdapter {
     private final UserDetailsServiceImpl userDetailsService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/v2/api-docs/**", "/swagger-resources/**",
+                "/swagger-ui.html", "/swagger-ui/**", "/swagger-resources");
+    }
+
+    //    @Override
+//    public void configure(org.springframework.security.config.annotation.web.builders.WebSecurity web) throws Exception {
+//        web.ignoring().antMatchers("/v3/api-docs",
+//                "/configuration/ui",
+//                "/swagger-resources/**",
+//                "/configuration/security",
+//                "/swagger-ui.html",
+//                "/webjars/**",
+//                "/swagger-ui/index.html");
+//    }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
