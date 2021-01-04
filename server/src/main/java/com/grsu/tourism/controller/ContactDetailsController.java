@@ -3,6 +3,8 @@ package com.grsu.tourism.controller;
 import com.grsu.tourism.exception.ApiError;
 import com.grsu.tourism.model.ContactDetails;
 import com.grsu.tourism.service.impl.ContactDetailsService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -20,7 +22,7 @@ public class ContactDetailsController {
     private final ContactDetailsService contactDetailsService;
 
     @PostMapping("/save")
-    @Operation(summary = "Add contact details")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Item found", content =
             @Content(schema = @Schema(implementation = ContactDetails.class), mediaType = MediaType.APPLICATION_JSON_VALUE)),
@@ -33,7 +35,7 @@ public class ContactDetailsController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete contact details")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Item found", content =
             @Content(schema = @Schema(implementation = ContactDetails.class), mediaType = MediaType.APPLICATION_JSON_VALUE)),

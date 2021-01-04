@@ -4,7 +4,8 @@ import com.grsu.tourism.dto.StockDto;
 import com.grsu.tourism.exception.ApiError;
 import com.grsu.tourism.model.Stock;
 import com.grsu.tourism.service.impl.StockService;
-import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -26,7 +27,7 @@ public class StockController {
 
     //TODO check if beginDate is today or next day but not date that is old
     @GetMapping("/get")
-    @Operation(summary = "Get stock")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Item found", content = {
                     @Content(schema = @Schema(implementation = Stock.class), mediaType = MediaType.APPLICATION_JSON_VALUE),
@@ -42,7 +43,7 @@ public class StockController {
     }
 
     @PostMapping("/save")
-    @Operation(summary = "Add stock")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Item found", content =
             @Content(schema = @Schema(implementation = Stock.class), mediaType = MediaType.APPLICATION_JSON_VALUE)),
@@ -55,7 +56,7 @@ public class StockController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete stock")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Item found", content =
             @Content(schema = @Schema(implementation = Stock.class), mediaType = MediaType.APPLICATION_JSON_VALUE)),
@@ -63,7 +64,7 @@ public class StockController {
             @Content(schema = @Schema(implementation = ApiError.class), mediaType = MediaType.APPLICATION_JSON_VALUE)),
             @ApiResponse(responseCode = "500", description = "System error", content =
             @Content(schema = @Schema(implementation = ApiError.class), mediaType = MediaType.APPLICATION_JSON_VALUE))})
-    public void deleteStock (@RequestParam Integer id) {
+    public void deleteStock(@RequestParam Integer id) {
         stockService.delete(id);
     }
 }

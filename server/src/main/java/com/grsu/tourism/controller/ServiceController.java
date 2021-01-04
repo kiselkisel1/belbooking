@@ -7,7 +7,8 @@ import com.grsu.tourism.exception.ApiError;
 import com.grsu.tourism.factory.ServiceFactory;
 import com.grsu.tourism.model.AbstractService;
 import com.grsu.tourism.service.GenericService;
-import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -32,7 +33,7 @@ public class ServiceController {
     private final ServiceFactory serviceFactory;
 
     @GetMapping("/type")
-    @Operation(summary = "Get services by type")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Item found", content =
             @Content(schema = @Schema(implementation = AbstractService.class), mediaType = MediaType.APPLICATION_JSON_VALUE)),
@@ -56,7 +57,7 @@ public class ServiceController {
 
 
     @GetMapping("/subType")
-    @Operation(summary = "Get services by type and subType")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Item found", content =
             @Content(schema = @Schema(implementation = AbstractService.class), mediaType = MediaType.APPLICATION_JSON_VALUE)),

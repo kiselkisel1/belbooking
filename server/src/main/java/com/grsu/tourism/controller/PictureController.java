@@ -4,6 +4,8 @@ import com.grsu.tourism.exception.ApiError;
 import com.grsu.tourism.model.OpeningHours;
 import com.grsu.tourism.model.Picture;
 import com.grsu.tourism.service.impl.PictureService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -20,7 +22,7 @@ public class PictureController {
     private final PictureService pictureService;
 
     @PostMapping("/save")
-    @Operation(summary = "Add picture")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Item found", content =
             @Content(schema = @Schema(implementation = Picture.class), mediaType = MediaType.APPLICATION_JSON_VALUE)),
@@ -33,7 +35,7 @@ public class PictureController {
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Delete picture")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Item found", content =
             @Content(schema = @Schema(implementation = OpeningHours.class), mediaType = MediaType.APPLICATION_JSON_VALUE)),

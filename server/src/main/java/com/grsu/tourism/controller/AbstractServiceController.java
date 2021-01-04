@@ -7,6 +7,7 @@ import com.grsu.tourism.model.AbstractService;
 import com.grsu.tourism.service.GenericService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -24,7 +25,7 @@ public abstract class AbstractServiceController<S extends AbstractService> {
     private final ServiceFactory<S> serviceFactory;
 
     @PostMapping("/add")
-    @ApiOperation(value = "This method is used to get the clients.")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Item found", content =
             @Content(schema = @Schema(implementation = AbstractService.class), mediaType = MediaType.APPLICATION_JSON_VALUE)),

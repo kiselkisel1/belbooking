@@ -6,7 +6,8 @@ import com.grsu.tourism.model.Facility;
 import com.grsu.tourism.model.TourProgram;
 import com.grsu.tourism.model.Tourism;
 import com.grsu.tourism.service.impl.TourismService;
-import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -27,7 +28,7 @@ public class TourismController extends AbstractServiceController<Tourism> {
     }
 
     @PostMapping("/addTourProgram")
-    @Operation(summary = "Add tour program")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Item found", content =
             @Content(schema = @Schema(implementation = Facility.class), mediaType = MediaType.APPLICATION_JSON_VALUE)),
