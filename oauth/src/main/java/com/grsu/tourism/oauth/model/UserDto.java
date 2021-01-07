@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Set;
 
 
@@ -22,12 +19,10 @@ public class UserDto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    private String name;
+    private String surname;
     private String email;
     private String password;
+    @Enumerated(EnumType.STRING)
     private Role role;
-//    private String phoneNumber;
-//    private String mobilePhone;
-//    private String email;
-//    private String address;
-
 }

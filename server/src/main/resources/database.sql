@@ -10,10 +10,6 @@ CREATE TABLE IF NOT EXISTS `user` (
     `surname` VARCHAR(100),
     `email` VARCHAR(200) NOT NULL UNIQUE,
     `password` VARCHAR(200) NOT NULL,
-    `mobile_phone` VARCHAR(100),
-    `date_of_birth` DATE,
-    `passport` VARCHAR(100),
-    `picure_url` VARCHAR(100),
     `role` VARCHAR(100)
 );
 

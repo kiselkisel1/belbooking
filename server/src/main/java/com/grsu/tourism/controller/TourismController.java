@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,15 +28,9 @@ public class TourismController extends AbstractServiceController<Tourism> {
         super(serviceFactory);
     }
 
+    @Secured("ROLE_ADMIN")
     @PostMapping("/addTourProgram")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Item found", content =
-            @Content(schema = @Schema(implementation = Facility.class), mediaType = MediaType.APPLICATION_JSON_VALUE)),
-            @ApiResponse(responseCode = "404", description = "Type is not found", content =
-            @Content(schema = @Schema(implementation = ApiError.class), mediaType = MediaType.APPLICATION_JSON_VALUE)),
-            @ApiResponse(responseCode = "500", description = "System error", content =
-            @Content(schema = @Schema(implementation = ApiError.class), mediaType = MediaType.APPLICATION_JSON_VALUE))})
     public Tourism addTourProgram(@RequestParam("tourId") Integer serviceId, @RequestBody TourProgram tourProgram) {
         return tourismService.saveTourProgram(tourProgram, serviceId);
     }

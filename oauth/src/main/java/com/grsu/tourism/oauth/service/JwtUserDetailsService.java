@@ -11,17 +11,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-
 import java.util.HashSet;
 import java.util.Set;
-
-import static java.util.Collections.emptyList;
 
 
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class JwtUserDetailsService implements UserDetailsService {
     private final UserRepo userRepo;
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -32,6 +29,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return new User(userDto.getEmail(), userDto.getPassword(), getAuthority(userDto));
     }
 
+    /**
+     * User has only field Role role, because admin has privileges as user and admin.
+     */
     private Set<SimpleGrantedAuthority> getAuthority(UserDto user) {
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
 //        user.getRole().forEach(role -> {
