@@ -17,5 +17,7 @@ public interface GenericService<S extends AbstractService> {
 
     S getById(Integer serviceId) throws NotFoundException;
 
+    void deleteService(Integer id);
+
     ServiceType getType();
 }

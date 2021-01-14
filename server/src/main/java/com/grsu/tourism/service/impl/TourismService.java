@@ -50,6 +50,11 @@ public class TourismService implements GenericService<Tourism> {
                 .orElseThrow(() -> new IllegalArgumentException("Tourism has not found for serviceId " + serviceId));
     }
 
+    @Override
+    public void deleteService(Integer id) {
+        tourismRepository.deleteById(id);
+    }
+
     public Tourism saveTourProgram(TourProgram tourProgram, Integer serviceId) {
         Tourism tourism = getById(serviceId);
         tourism.getTourPrograms().add(tourProgram);

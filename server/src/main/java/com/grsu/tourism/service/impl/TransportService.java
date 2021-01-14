@@ -31,8 +31,7 @@ public class TransportService implements GenericService<Transport> {
     public List<Transport> getAllByTypeAndSubType(String subType, Pageable pageable) {
 
         TransportEnum.getByNameIgnoreCaseOrElseThrow(subType);
-        List<Transport> transports = transportRepository.findByTypeAndSubType(TRANSPORT.getName(), subType, pageable);
-        return transports;
+        return transportRepository.findByTypeAndSubType(TRANSPORT.getName(), subType, pageable);
     }
 
     @Override
@@ -45,6 +44,11 @@ public class TransportService implements GenericService<Transport> {
     public Transport getById(Integer serviceId) {
         Optional<Transport> housing = transportRepository.findById(serviceId);
         return housing.orElseGet(Transport::new);
+    }
+
+    @Override
+    public void deleteService(Integer id) {
+        transportRepository.deleteById(id);
     }
 
     @Override

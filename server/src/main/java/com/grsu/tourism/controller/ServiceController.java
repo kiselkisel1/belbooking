@@ -12,10 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,7 +23,7 @@ public class ServiceController {
     private final ServiceConverter serviceConverter;
     private final ServiceFactory serviceFactory;
 
-    @Secured({ "ROLE_USER", "ROLE_ADMIN" })
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("/type")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
     public List<ServiceDto> getServices(@RequestParam String type,
@@ -44,7 +41,7 @@ public class ServiceController {
     }
 
 
-    @Secured({ "ROLE_USER", "ROLE_ADMIN" })
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("/subType")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
     public List<ServiceDto> getServicesBySubType(@RequestParam String type,
@@ -59,5 +56,16 @@ public class ServiceController {
         GenericService genericService = serviceFactory.getServiceByType(serviceType);
         List services = genericService.getAllByTypeAndSubType(subType, paging);
         return serviceConverter.convert(services);
+    }
+
+    @Secured("ROLE_ADMIN")
+    @DeleteMapping("/delete")
+    @ApiOperation(value = "deleteService", authorizations = {@Authorization(value = "jwtToken")})
+    public void deleteService(@RequestParam Integer id, @RequestParam String type) {
+        ServiceType serviceType = ServiceType.getByNameIgnoreCaseOrElseThrow(type);
+
+        
+        GenericService genericService = serviceFactory.getServiceByType(serviceType);
+        genericService.deleteService(id);
     }
 }

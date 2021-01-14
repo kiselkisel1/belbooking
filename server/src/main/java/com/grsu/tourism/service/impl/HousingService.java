@@ -50,6 +50,11 @@ public class HousingService implements GenericService<Housing> {
     }
 
     @Override
+    public void deleteService(Integer id) {
+        housingRepository.deleteById(id);
+    }
+
+    @Override
     public ServiceType getType() {
         return HOUSING;
     }

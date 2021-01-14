@@ -8,9 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
@@ -19,7 +17,7 @@ public abstract class AbstractServiceController<S extends AbstractService> {
 
     @Secured("ROLE_ADMIN")
     @PostMapping("/add")
-    @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
+    @ApiOperation(value = "addService", authorizations = {@Authorization(value = "jwtToken")})
     public S addService(@RequestBody S service) {
         ServiceType serviceType = ServiceType.getByNameIgnoreCaseOrElseThrow(service.getType());
 

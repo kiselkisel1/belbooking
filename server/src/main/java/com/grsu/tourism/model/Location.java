@@ -17,14 +17,11 @@ public class Location {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer serviceId;
+    private Integer regionId;
 
     private String name;
     private String address;
     private Double latitude;
     private Double longitude;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "region_id")
-    private Region region;
 
 }

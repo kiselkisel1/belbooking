@@ -48,6 +48,11 @@ public class AttractionService implements GenericService<AbstractService> {
     }
 
     @Override
+    public void deleteService(Integer id) {
+        abstractServiceRepository.deleteById(id);
+    }
+
+    @Override
     public ServiceType getType() {
         return ATTRACTIONS;
     }
