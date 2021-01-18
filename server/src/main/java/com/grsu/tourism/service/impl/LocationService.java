@@ -5,7 +5,7 @@ import com.grsu.tourism.model.Location;
 import com.grsu.tourism.model.Region;
 import com.grsu.tourism.repository.LocationRepository;
 import com.grsu.tourism.repository.RegionRepository;
-import com.grsu.tourism.validator.ValidateService;
+import com.grsu.tourism.validator.ValidateUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,7 +23,7 @@ import static java.util.stream.Collectors.*;
 public class LocationService {
     private final LocationRepository locationRepository;
     private final RegionRepository regionRepository;
-    private final ValidateService validateService;
+    private final ValidateUtil validateService;
 
     public Map<Integer, List<Location>> getAllMapByServiceIds(Collection<Integer> serviceIds) {
         List<Location> locations = locationRepository.findByIdIn(serviceIds);

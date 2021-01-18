@@ -28,9 +28,9 @@ create table if not exists booking(
 	id int not null auto_increment primary key,
 	`status` VARCHAR(45) not null,
 	`payment_date` DATE,
-	`payment_currancy` VARCHAR(45),
-	`service_id` INT not null,
-	`user_id` INT not null,
+	`payment_currency` VARCHAR(45),
+	`service_id` INT,
+	`user_id` INT,
 	foreign key (service_id) references service(id)
 	on update cascade
     on delete cascade,
@@ -42,8 +42,8 @@ create table if not exists booking(
 
 create table if not exists `bookmarks`(
     id int not null primary key auto_increment,
-	`user_id` INT NOT NULL,
-	`service_id` INT NOT NULL,
+	`user_id` INT,
+	`service_id` INT,
 
 	foreign key (service_id) references service(id)
 	on update cascade
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
     `description` VARCHAR(400),
     `rating` FLOAT,
     `comment_date` DATE NOT NULL,
-    `service_id` INT NOT NULL,
+    `service_id` INT,
 
 	foreign key (service_id) references service(id)
 	on update cascade
