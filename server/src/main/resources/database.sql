@@ -27,7 +27,7 @@ create table if not exists service(
 create table if not exists booking(
 	id int not null auto_increment primary key,
 	`status` VARCHAR(45) not null,
-	`payment_date` DATE,
+	`booking_date` DATE,
 	`payment_currency` VARCHAR(45),
 	`service_id` INT,
 	`user_id` INT,

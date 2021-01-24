@@ -6,10 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity(name = "booking")
@@ -24,8 +21,9 @@ public class Booking {
     private Integer service_id;
     private Integer user_id;
 
+    @Enumerated(EnumType.STRING)
     private Status status;
-    private LocalDateTime paymentDate;
+    private LocalDateTime bookingDate;
     private String paymentCurrency;
 
 }
