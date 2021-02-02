@@ -40,7 +40,7 @@ create table if not exists booking(
     on delete cascade
 );
 
-create table if not exists `bookmarks`(
+create table if not exists `bookmark`(
     id int not null primary key auto_increment,
 	`user_id` INT,
 	`service_id` INT,
@@ -54,12 +54,13 @@ create table if not exists `bookmarks`(
     on delete cascade
 );
 
-CREATE TABLE IF NOT EXISTS `comments` (
+CREATE TABLE IF NOT EXISTS `comment` (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `description` VARCHAR(400),
     `rating` FLOAT,
     `comment_date` DATE NOT NULL,
     `service_id` INT,
+    `user_id` INT,
 
 	foreign key (service_id) references service(id)
 	on update cascade

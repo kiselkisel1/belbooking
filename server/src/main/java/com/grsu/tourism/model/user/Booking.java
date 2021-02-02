@@ -1,6 +1,7 @@
-package com.grsu.tourism.model;
+package com.grsu.tourism.model.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.grsu.tourism.model.Status;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,8 +19,8 @@ public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer service_id;
-    private Integer user_id;
+    private Integer serviceId;
+    private Integer userId;
 
     @Enumerated(EnumType.STRING)
     private Status status;

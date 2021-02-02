@@ -63,8 +63,6 @@ public class ServiceController {
     @ApiOperation(value = "deleteService", authorizations = {@Authorization(value = "jwtToken")})
     public void deleteService(@RequestParam Integer id, @RequestParam String type) {
         ServiceType serviceType = ServiceType.getByNameIgnoreCaseOrElseThrow(type);
-
-        
         GenericService genericService = serviceFactory.getServiceByType(serviceType);
         genericService.deleteService(id);
     }
