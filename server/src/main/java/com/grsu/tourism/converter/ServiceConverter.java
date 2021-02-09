@@ -9,6 +9,7 @@ import com.grsu.tourism.service.impl.OpeningHoursService;
 import com.grsu.tourism.service.impl.PictureService;
 import lombok.AllArgsConstructor;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -30,7 +31,7 @@ public class ServiceConverter implements Converter<AbstractService, ServiceDto> 
     private Map<Integer, List<Location>> locationMap;
     private Map<Integer, List<ContactDetails>> contactDetailsMap;
     private Map<Integer, List<Stock>> stockMap;
-    private Map<Integer, List<Picture>> pictureMap;
+    private Map<Integer, List<Resource>> pictureMap;
     private Map<Integer, List<OpeningHours>> openingHoursMap;
 
     @Override
@@ -53,7 +54,7 @@ public class ServiceConverter implements Converter<AbstractService, ServiceDto> 
         locationMap = locationService.getAllMapByServiceIds(serviceIds);
         contactDetailsMap = contactDetailsService.getAllMapByServiceIds(serviceIds);
         stockMap = getStockMapByServiceIds(serviceIds);
-        pictureMap = pictureService.getAllMapByServiceIds(serviceIds);
+        pictureMap = pictureService.getAllResourcesByServiceIds(serviceIds);
         openingHoursMap = openingHoursService.getAllMapByServiceIds(serviceIds);
 
         return source.stream().map(this::convert).collect(Collectors.toList());

@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface PictureRepository extends CrudRepository<Picture, Integer> {
-    List<Picture> findByServiceIdIn(Collection<Integer> serviceIds);
+    List<Picture> findByServiceIdInAndIsActive(Collection<Integer> serviceIds, Boolean isActive);
 
 }
