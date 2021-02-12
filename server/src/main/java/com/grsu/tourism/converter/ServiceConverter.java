@@ -31,7 +31,6 @@ public class ServiceConverter implements Converter<AbstractService, ServiceDto> 
     private Map<Integer, List<Location>> locationMap;
     private Map<Integer, List<ContactDetails>> contactDetailsMap;
     private Map<Integer, List<Stock>> stockMap;
-    private Map<Integer, List<Resource>> pictureMap;
     private Map<Integer, List<OpeningHours>> openingHoursMap;
 
     @Override
@@ -42,7 +41,7 @@ public class ServiceConverter implements Converter<AbstractService, ServiceDto> 
                 .locations(locationMap.get(serviceId))
                 .contactDetails(contactDetailsMap.get(serviceId))
                 .stocks(stockMap.get(serviceId))
-                .pictures(pictureMap.get(serviceId))
+                .pictures(pictureService.getPathsByServiceId(serviceId))
                 .openingHours(openingHoursMap.get(serviceId))
                 .build();
         return serviceDto;
@@ -54,7 +53,6 @@ public class ServiceConverter implements Converter<AbstractService, ServiceDto> 
         locationMap = locationService.getAllMapByServiceIds(serviceIds);
         contactDetailsMap = contactDetailsService.getAllMapByServiceIds(serviceIds);
         stockMap = getStockMapByServiceIds(serviceIds);
-        pictureMap = pictureService.getAllResourcesByServiceIds(serviceIds);
         openingHoursMap = openingHoursService.getAllMapByServiceIds(serviceIds);
 
         return source.stream().map(this::convert).collect(Collectors.toList());

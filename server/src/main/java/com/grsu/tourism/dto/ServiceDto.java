@@ -5,9 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.core.io.Resource;
 
 import java.util.List;
+import java.util.Map;
 
 @Data
 @Builder
@@ -18,7 +18,7 @@ public class ServiceDto<S extends AbstractService> {
 
     private List<ContactDetails> contactDetails;
     private List<Location> locations;
-    private List<Resource> pictures;
+    private Map<String, String> pictures;
     private List<Stock> stocks;
     private List<OpeningHours> openingHours;
 }

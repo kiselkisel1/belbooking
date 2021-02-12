@@ -13,8 +13,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
 import java.util.Objects;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 @Service
 public class FileStorageService {
@@ -58,11 +59,28 @@ public class FileStorageService {
         FileSystemUtils.deleteRecursively(root.toFile());
     }
 
-    public Stream<Path> loadAll() {
+    public void deleteByFilename(String filename) {
+        Path file = root.resolve(filename);
+        FileSystemUtils.deleteRecursively(file.toFile());
+    }
+
+    public List<Path> loadAll() {
         try {
             return Files.walk(this.root, 1)
                     .filter(path -> !path.equals(this.root))
-                    .map(this.root::relativize);
+                    .map(this.root::relativize)
+                    .collect(Collectors.toList());
+        } catch (IOException e) {
+            throw new RuntimeException("Could not load the files!");
+        }
+    }
+
+    public List<Path> loadAllByFileNames(List<String> fileNames) {
+        try {
+            return Files.walk(this.root, 1)
+                    .filter(path -> fileNames.contains(path.getFileName().toString()))
+                    .map(this.root::relativize)
+                    .collect(Collectors.toList());
         } catch (IOException e) {
             throw new RuntimeException("Could not load the files!");
         }

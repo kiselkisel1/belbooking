@@ -18,7 +18,6 @@ public class Picture {
     private Integer id;
     private Integer serviceId;
 
-    @Column(name = "picture_url")
-    private String pictureUrl;
+    private String filename;
     private Boolean isActive;
 }

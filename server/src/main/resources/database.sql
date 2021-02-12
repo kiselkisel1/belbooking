@@ -162,7 +162,7 @@ CREATE TABLE IF NOT EXISTS `opening_hours` (
 
 CREATE TABLE IF NOT EXISTS `picture` (
    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `picture_url` VARCHAR(200) not null,
+  `filename` VARCHAR(200) not null,
   `is_active` INT not null,
   `service_id` INT,
 
