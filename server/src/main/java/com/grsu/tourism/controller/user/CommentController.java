@@ -21,7 +21,7 @@ public class CommentController {
 
     private final CommentService commentService;
 
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @Secured({"ROLE_ADMIN"})
     @PostMapping("/add")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
     public Comment addComment(@RequestBody Comment comment) {

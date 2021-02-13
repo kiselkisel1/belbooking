@@ -3,6 +3,7 @@ package com.grsu.tourism.service.impl;
 import com.grsu.tourism.converter.CateringConverter;
 import com.grsu.tourism.enums.CateringEnum;
 import com.grsu.tourism.enums.ServiceType;
+import com.grsu.tourism.model.AbstractService;
 import com.grsu.tourism.model.Catering;
 import com.grsu.tourism.service.GenericService;
 import com.grsu.tourism.validator.ValidateService;

@@ -20,7 +20,6 @@ import static java.util.stream.Collectors.*;
 public class MenuService {
     private final MenuRepository menuRepository;
 
-    //поменять чтобы передавались serviceIds по ним находилось и потом делалась мапа
     public Map<Integer, List<Menu>> getAllMapByServiceIds(Collection<Integer> serviceIds) {
         List<Menu> menus = menuRepository.findByServiceIdIn(serviceIds);
 
