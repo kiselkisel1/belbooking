@@ -6,7 +6,6 @@ import com.grsu.tourism.oauth.service.UserService;
 import com.grsu.tourism.repository.CommentRepository;
 import com.grsu.tourism.validator.ValidateUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +29,19 @@ public class CommentService {
     public Comment getById(Integer commentId) {
         return commentRepository.findById(commentId)
                 .orElseThrow(() -> new IllegalArgumentException("Comment with id is not found " + commentId));
+    }
+
+    public List<Comment> getByServiceId(Integer serviceId) {
+        validateService.isServiceExists(serviceId);
+        return commentRepository.findByServiceId(serviceId);
+    }
+
+    public List<Comment> getForCurrentUser() {
+        String email = userService.getCurrentUserEmail();
+        UserDto userDto = Optional.ofNullable(userService.getByEmail(email))
+                .orElseThrow(() -> new IllegalArgumentException("User with email is not found in the system " + email));
+
+        return commentRepository.findByUserId(userDto.getId());
     }
 
     public Comment save(Comment comment) {

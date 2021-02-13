@@ -5,7 +5,6 @@ import com.grsu.tourism.service.user.CommentService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -44,6 +43,20 @@ public class CommentController {
 
         Pageable paging = PageRequest.of(pageNumber, pageSize, Sort.by(sortBy));
         return commentService.getAll(paging);
+    }
+
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @GetMapping("/getByServiceId/{serviceId}")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
+    public List<Comment> getByServiceId(@PathVariable Integer serviceId) {
+        return commentService.getByServiceId(serviceId);
+    }
+
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @GetMapping("/getForCurrentUser")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
+    public List<Comment> getForCurrentUser() {
+        return commentService.getForCurrentUser();
     }
 
     @Secured("ROLE_ADMIN")
