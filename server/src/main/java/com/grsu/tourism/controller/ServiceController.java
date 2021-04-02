@@ -23,9 +23,7 @@ public class ServiceController {
     private final ServiceConverter serviceConverter;
     private final ServiceFactory serviceFactory;
 
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("/type")
-    @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
     public List<ServiceDto> getServices(@RequestParam String type,
                                         @RequestParam(defaultValue = "0") Integer pageNumber,
                                         @RequestParam(defaultValue = "10") Integer pageSize,
@@ -41,9 +39,7 @@ public class ServiceController {
     }
 
 
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("/subType")
-    @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
     public List<ServiceDto> getServicesBySubType(@RequestParam String type,
                                                  @RequestParam String subType,
                                                  @RequestParam(defaultValue = "0") Integer pageNumber,

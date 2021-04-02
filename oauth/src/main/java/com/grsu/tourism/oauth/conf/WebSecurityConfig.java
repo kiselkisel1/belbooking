@@ -72,10 +72,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 // dont authenticate this particular request
                 .authorizeRequests()
-                .antMatchers("/authenticate", "/register").permitAll()
-        // all other requests need to be authenticated
-        // anyRequest().authenticated()
-        ;
+                .antMatchers("/authenticate", "/register")
+                .permitAll()
+                .antMatchers(UnauthorizedRequests.urls)
+                .permitAll();
 
         // Add a filter to validate the tokens with every request
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);

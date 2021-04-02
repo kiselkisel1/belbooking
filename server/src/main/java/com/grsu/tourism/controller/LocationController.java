@@ -28,9 +28,7 @@ public class LocationController {
         return locationService.save(location);
     }
 
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("/get")
-    @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
     public List<Location> getLocations(@RequestParam(defaultValue = "0") Integer pageNumber,
                                        @RequestParam(defaultValue = "10") Integer pageSize,
                                        @RequestParam(defaultValue = "name") String sortBy) {
@@ -47,9 +45,7 @@ public class LocationController {
         return locationService.save(region);
     }
 
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("/region/get")
-    @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
     public List<Region> getRegions(@RequestParam(defaultValue = "0") Integer pageNumber,
                                    @RequestParam(defaultValue = "10") Integer pageSize,
                                    @RequestParam(defaultValue = "name") String sortBy) {
@@ -58,16 +54,12 @@ public class LocationController {
         return locationService.getAllRegions(paging);
     }
 
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("/region/getById")
-    @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
     public Region getRegionById(@RequestParam Integer id) {
         return locationService.getRegionById(id);
     }
 
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("/getById")
-    @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
     public Location getLocationById(@RequestParam Integer id) {
         return locationService.getLocationById(id);
     }

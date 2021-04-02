@@ -33,19 +33,15 @@ public class PictureController {
         return pictureService.save(file, serviceId);
     }
 
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("/getByServiceId/{serviceId}")
-    @ApiOperation(value = "Get file by service id", authorizations = {@Authorization(value = "jwtToken")})
     public ResponseEntity<Map<String, String>> getByServiceId(@PathVariable Integer serviceId) {
         Map<String, String> fileInfos = pictureService.getPathsByServiceId(serviceId);
 
         return ResponseEntity.status(HttpStatus.OK).body(fileInfos);
     }
 
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("/getAll")
     @ResponseBody
-    @ApiOperation(value = "Get all files", authorizations = {@Authorization(value = "jwtToken")})
     public ResponseEntity<Map<String, String>> getListFiles() {
         Map<String, String> fileInfos = fileStorageService.loadAll()
                 .stream()
@@ -54,10 +50,8 @@ public class PictureController {
         return ResponseEntity.status(HttpStatus.OK).body(fileInfos);
     }
 
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("/get/{filename:.+}")
     @ResponseBody
-    @ApiOperation(value = "Get file by filename", authorizations = {@Authorization(value = "jwtToken")})
     public ResponseEntity<Resource> getFile(@PathVariable String filename) {
         Resource file = fileStorageService.load(filename);
         return ResponseEntity.ok()

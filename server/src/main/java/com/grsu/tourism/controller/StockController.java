@@ -21,9 +21,7 @@ public class StockController {
     private final StockService stockService;
 
     //TODO check if beginDate is today or next day but not date that is old
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("/get")
-    @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
     public List<StockDto> getStocks(@RequestParam(defaultValue = "0") Integer pageNumber,
                                     @RequestParam(defaultValue = "10") Integer pageSize,
                                     @RequestParam(defaultValue = "discount") String sortBy) {
