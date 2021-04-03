@@ -8,12 +8,24 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/openingHours")
 public class OpeningHoursController {
 
     private final OpeningHoursService openingHoursService;
+
+    @GetMapping("/getById")
+    public OpeningHours getOpeningHoursById(@RequestParam Integer id) {
+        return openingHoursService.getById(id);
+    }
+
+    @GetMapping("/get")
+    public List<OpeningHours> getOpeningHours() {
+        return openingHoursService.getAllOpeningHours();
+    }
 
     @Secured("ROLE_ADMIN")
     @PostMapping("/save")

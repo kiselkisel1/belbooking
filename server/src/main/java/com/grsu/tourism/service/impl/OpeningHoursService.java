@@ -44,6 +44,15 @@ public class OpeningHoursService {
         return openingHoursMap;
     }
 
+    public List<OpeningHours> getAllOpeningHours() {
+        return Lists.newArrayList(openingHoursRepository.findAll());
+    }
+
+    public OpeningHours getById(Integer id) {
+        return openingHoursRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("OpeningHours was not found for id " + id));
+    }
+
     public OpeningHours save(OpeningHours openingHours) {
         return this.openingHoursRepository.save(openingHours);
     }

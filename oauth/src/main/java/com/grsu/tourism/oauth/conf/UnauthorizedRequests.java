@@ -15,7 +15,10 @@ public class UnauthorizedRequests {
                     "/services/type",
                     "/services/subType",
 
-                    "/stocks/get"
+                    "/stocks/get",
+
+                    "/openingHours/get",
+                    "/openingHours/getById"
 
             };
 
