@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface LocationRepository extends PagingAndSortingRepository<Location, Integer> {
-    List<Location> findByIdIn(Collection<Integer> serviceIds);
+    List<Location> findByServiceIdIn(Collection<Integer> serviceIds);
 
 }

@@ -26,7 +26,7 @@ public class LocationService {
     private final ValidateUtil validateService;
 
     public Map<Integer, List<Location>> getAllMapByServiceIds(Collection<Integer> serviceIds) {
-        List<Location> locations = locationRepository.findByIdIn(serviceIds);
+        List<Location> locations = locationRepository.findByServiceIdIn(serviceIds);
 
         Map<Integer, List<Location>> locationMap = new HashMap<>();
         if (!CollectionUtils.isEmpty(locations)) {
@@ -49,6 +49,7 @@ public class LocationService {
     //add validation if serviceId exists
     public Location save(Location location) {
         validateService.isServiceExists(location.getServiceId());
+        validateService.isRegionExists(location.getRegionId());
         return this.locationRepository.save(location);
     }
 
