@@ -20,7 +20,7 @@ public class CommentController {
 
     private final CommentService commentService;
 
-    @Secured({"ROLE_ADMIN"})
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @PostMapping("/add")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
     public Comment addComment(@RequestBody Comment comment) {
@@ -53,7 +53,7 @@ public class CommentController {
         return commentService.getForCurrentUser();
     }
 
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @DeleteMapping("/delete")
     @ApiOperation(value = "delete", authorizations = {@Authorization(value = "jwtToken")})
     public void delete(@RequestParam Integer id) {
