@@ -18,7 +18,11 @@ public class UnauthorizedRequests {
                     "/stocks/get",
 
                     "/openingHours/get",
-                    "/openingHours/getById"
+                    "/openingHours/getById",
+
+                    "/comment/getById",
+                    "/comment/getAll",
+                    "/comment/getByServiceId/{serviceId}"
 
             };
 

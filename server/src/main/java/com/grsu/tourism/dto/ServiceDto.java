@@ -1,6 +1,7 @@
 package com.grsu.tourism.dto;
 
 import com.grsu.tourism.model.*;
+import com.grsu.tourism.model.user.Comment;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,4 +22,5 @@ public class ServiceDto<S extends AbstractService> {
     private Map<String, String> pictures;
     private List<Stock> stocks;
     private List<OpeningHours> openingHours;
+    private List<Comment> comments;
 }

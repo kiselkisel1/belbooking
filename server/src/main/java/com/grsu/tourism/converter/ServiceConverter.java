@@ -2,14 +2,15 @@ package com.grsu.tourism.converter;
 
 import com.grsu.tourism.dto.ServiceDto;
 import com.grsu.tourism.model.*;
+import com.grsu.tourism.model.user.Comment;
 import com.grsu.tourism.repository.StockRepository;
 import com.grsu.tourism.service.impl.ContactDetailsService;
 import com.grsu.tourism.service.impl.LocationService;
 import com.grsu.tourism.service.impl.OpeningHoursService;
 import com.grsu.tourism.service.impl.PictureService;
+import com.grsu.tourism.service.user.CommentService;
 import lombok.AllArgsConstructor;
 import org.springframework.core.convert.converter.Converter;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -27,11 +28,13 @@ public class ServiceConverter implements Converter<AbstractService, ServiceDto> 
     private final PictureService pictureService;
     private final OpeningHoursService openingHoursService;
     private final StockRepository stockRepository;
+    private final CommentService commentService;
 
     private Map<Integer, List<Location>> locationMap;
     private Map<Integer, List<ContactDetails>> contactDetailsMap;
     private Map<Integer, List<Stock>> stockMap;
     private Map<Integer, List<OpeningHours>> openingHoursMap;
+    private Map<Integer, List<Comment>> commentsMap;
 
     @Override
     public ServiceDto convert(AbstractService source) {
@@ -43,6 +46,7 @@ public class ServiceConverter implements Converter<AbstractService, ServiceDto> 
                 .stocks(stockMap.get(serviceId))
                 .pictures(pictureService.getPathsByServiceId(serviceId))
                 .openingHours(openingHoursMap.get(serviceId))
+                .comments(commentsMap.get(serviceId))
                 .build();
         return serviceDto;
     }
@@ -54,6 +58,7 @@ public class ServiceConverter implements Converter<AbstractService, ServiceDto> 
         contactDetailsMap = contactDetailsService.getAllMapByServiceIds(serviceIds);
         stockMap = getStockMapByServiceIds(serviceIds);
         openingHoursMap = openingHoursService.getAllMapByServiceIds(serviceIds);
+        commentsMap = commentService.getAllMapByServiceIds(serviceIds);
 
         return source.stream().map(this::convert).collect(Collectors.toList());
     }

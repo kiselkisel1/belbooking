@@ -27,16 +27,12 @@ public class CommentController {
         return commentService.save(comment);
     }
 
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("/getById")
-    @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
     public Comment getComment(@RequestParam Integer id) {
         return commentService.getById(id);
     }
 
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("/getAll")
-    @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
     public List<Comment> getAll(@RequestParam(defaultValue = "0") Integer pageNumber,
                                 @RequestParam(defaultValue = "10") Integer pageSize,
                                 @RequestParam(defaultValue = "rating") String sortBy) {
@@ -45,9 +41,7 @@ public class CommentController {
         return commentService.getAll(paging);
     }
 
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("/getByServiceId/{serviceId}")
-    @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
     public List<Comment> getByServiceId(@PathVariable Integer serviceId) {
         return commentService.getByServiceId(serviceId);
     }

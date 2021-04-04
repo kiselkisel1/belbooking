@@ -1,5 +1,6 @@
 package com.grsu.tourism.service.user;
 
+import com.grsu.tourism.model.Location;
 import com.grsu.tourism.model.user.Comment;
 import com.grsu.tourism.oauth.model.UserDto;
 import com.grsu.tourism.oauth.service.UserService;
@@ -8,11 +9,13 @@ import com.grsu.tourism.validator.ValidateUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+
+import static java.util.stream.Collectors.*;
 
 @Service
 @Transactional
@@ -21,6 +24,17 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final ValidateUtil validateService;
     private final UserService userService;
+
+    public Map<Integer, List<Comment>> getAllMapByServiceIds(Collection<Integer> serviceIds) {
+        List<Comment> locations = commentRepository.findByServiceIdIn(serviceIds);
+
+        Map<Integer, List<Comment>> locationMap = new HashMap<>();
+        if (!CollectionUtils.isEmpty(locations)) {
+            locationMap = locations.stream()
+                    .collect(groupingBy(Comment::getServiceId, mapping(row -> row, toList())));
+        }
+        return locationMap;
+    }
 
     public List<Comment> getAll(Pageable pageable) {
         return commentRepository.findAll(pageable).getContent();

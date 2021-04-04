@@ -46,7 +46,6 @@ public class LocationService {
         return locations;
     }
 
-    //add validation if serviceId exists
     public Location save(Location location) {
         validateService.isServiceExists(location.getServiceId());
         validateService.isRegionExists(location.getRegionId());
