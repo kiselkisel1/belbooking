@@ -48,7 +48,9 @@ public class LocationService {
 
     public Location save(Location location) {
         validateService.isServiceExists(location.getServiceId());
-        validateService.isRegionExists(location.getRegionId());
+        if (location.getRegionId() != null) {
+            validateService.isRegionExists(location.getRegionId());
+        }
         return this.locationRepository.save(location);
     }
 
