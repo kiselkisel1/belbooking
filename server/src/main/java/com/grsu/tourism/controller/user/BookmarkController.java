@@ -19,7 +19,7 @@ import java.util.List;
 public class BookmarkController {
     private final BookmarkService bookmarkService;
 
-    @Secured({"ROLE_ADMIN"})
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @PostMapping("/add/{serviceId}")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
     public Bookmark addBookmark(@PathVariable Integer serviceId) {
