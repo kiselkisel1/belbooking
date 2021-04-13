@@ -7,11 +7,13 @@ import com.grsu.tourism.factory.ServiceFactory;
 import com.grsu.tourism.service.GenericService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
+import javassist.NotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -53,6 +55,21 @@ public class ServiceController {
         List services = genericService.getAllByTypeAndSubType(subType, paging);
         return serviceConverter.convert(services);
     }
+
+    @GetMapping("/getById")
+    public ServiceDto getServicesById(@RequestParam String type, @RequestParam Integer id) throws NotFoundException {
+
+        ServiceType serviceType = ServiceType.getByNameIgnoreCaseOrElseThrow(type);
+
+        var genericService = serviceFactory.getServiceByType(serviceType);
+        var services = genericService.getById(id);
+        List<ServiceDto> serviceDtos = serviceConverter.convert(List.of(services));
+        if (CollectionUtils.isEmpty(serviceDtos)) {
+            throw new IllegalArgumentException("Not able to convert to service dto");
+        }
+        return serviceDtos.get(0);
+    }
+
 
     @Secured("ROLE_ADMIN")
     @DeleteMapping("/delete")
