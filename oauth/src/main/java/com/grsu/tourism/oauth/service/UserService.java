@@ -5,11 +5,11 @@ import com.grsu.tourism.oauth.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -31,5 +31,12 @@ public class UserService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
         return currentPrincipalName;
+    }
+
+    public UserDto getCurrentUserInfo() {
+        String email = getCurrentUserEmail();
+        UserDto userDto = Optional.ofNullable(getByEmail(email))
+                .orElseThrow(() -> new IllegalArgumentException("User with email is not found in the system " + email));
+        return userDto;
     }
 }

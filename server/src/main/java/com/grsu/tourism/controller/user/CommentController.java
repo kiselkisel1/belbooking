@@ -37,7 +37,7 @@ public class CommentController {
                                 @RequestParam(defaultValue = "10") Integer pageSize,
                                 @RequestParam(defaultValue = "rating") String sortBy) {
 
-        Pageable paging = PageRequest.of(pageNumber, pageSize, Sort.by(sortBy));
+        Pageable paging = PageRequest.of(pageNumber, pageSize, Sort.by(sortBy).descending());
         return commentService.getAll(paging);
     }
 
