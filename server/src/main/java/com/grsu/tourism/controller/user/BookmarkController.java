@@ -1,5 +1,6 @@
 package com.grsu.tourism.controller.user;
 
+import com.grsu.tourism.enums.ServiceType;
 import com.grsu.tourism.model.Bookmark;
 import com.grsu.tourism.service.user.BookmarkService;
 import io.swagger.annotations.ApiOperation;
@@ -22,8 +23,10 @@ public class BookmarkController {
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @PostMapping("/add/{serviceId}")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "jwtToken")})
-    public Bookmark addBookmark(@PathVariable Integer serviceId) {
-        return bookmarkService.save(serviceId);
+    public Bookmark addBookmark(@PathVariable Integer serviceId, @RequestParam String type) {
+        ServiceType serviceType = ServiceType.getByNameIgnoreCaseOrElseThrow(type);
+
+        return bookmarkService.save(serviceId, type);
     }
 
     @Secured({"ROLE_USER", "ROLE_ADMIN"})

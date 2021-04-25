@@ -1,14 +1,12 @@
 package com.grsu.tourism.model;
 
+import com.grsu.tourism.enums.ServiceType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -21,4 +19,6 @@ public class Bookmark {
     private Integer id;
     private Integer userId;
     private Integer serviceId;
+    @Column(name = "service_type")
+    private String serviceType;
 }

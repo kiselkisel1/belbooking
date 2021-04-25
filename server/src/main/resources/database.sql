@@ -44,6 +44,7 @@ create table if not exists `bookmark`(
     id int not null primary key auto_increment,
 	`user_id` INT,
 	`service_id` INT,
+	`service_type` VARCHAR(100),
 
 	foreign key (service_id) references service(id)
 	on update cascade

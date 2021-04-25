@@ -1,5 +1,6 @@
 package com.grsu.tourism.service.user;
 
+import com.grsu.tourism.enums.ServiceType;
 import com.grsu.tourism.model.Bookmark;
 import com.grsu.tourism.oauth.model.UserDto;
 import com.grsu.tourism.oauth.service.UserService;
@@ -22,7 +23,7 @@ public class BookmarkService {
     private final ValidateUtil validateService;
     private final UserService userService;
 
-    public Bookmark save(Integer serviceId) {
+    public Bookmark save(Integer serviceId, String serviceType) {
         validateService.isServiceExists(serviceId);
         String email = userService.getCurrentUserEmail();
         UserDto userDto = Optional.ofNullable(userService.getByEmail(email))
@@ -31,6 +32,7 @@ public class BookmarkService {
         Bookmark bookmark = new Bookmark();
         bookmark.setUserId(userDto.getId());
         bookmark.setServiceId(serviceId);
+        bookmark.setServiceType(serviceType);
         return bookmarkRepository.save(bookmark);
     }
 
