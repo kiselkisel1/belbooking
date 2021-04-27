@@ -1,6 +1,8 @@
 package com.grsu.tourism.controller.user;
 
+import com.grsu.tourism.dto.CommentDto;
 import com.grsu.tourism.model.user.Comment;
+import com.grsu.tourism.service.user.CommentDtoService;
 import com.grsu.tourism.service.user.CommentService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
@@ -18,6 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CommentController {
 
+    private final CommentDtoService dtoService;
     private final CommentService commentService;
 
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
@@ -28,22 +31,22 @@ public class CommentController {
     }
 
     @GetMapping("/getById")
-    public Comment getComment(@RequestParam Integer id) {
-        return commentService.getById(id);
+    public CommentDto getComment(@RequestParam Integer id) {
+        return dtoService.getById(id);
     }
 
     @GetMapping("/getAll")
-    public List<Comment> getAll(@RequestParam(defaultValue = "0") Integer pageNumber,
+    public List<CommentDto> getAll(@RequestParam(defaultValue = "0") Integer pageNumber,
                                 @RequestParam(defaultValue = "10") Integer pageSize,
                                 @RequestParam(defaultValue = "rating") String sortBy) {
 
         Pageable paging = PageRequest.of(pageNumber, pageSize, Sort.by(sortBy).descending());
-        return commentService.getAll(paging);
+        return dtoService.getAll(paging);
     }
 
     @GetMapping("/getByServiceId/{serviceId}")
-    public List<Comment> getByServiceId(@PathVariable Integer serviceId) {
-        return commentService.getByServiceId(serviceId);
+    public List<CommentDto> getByServiceId(@PathVariable Integer serviceId) {
+        return dtoService.getByServiceId(serviceId);
     }
 
     @Secured({"ROLE_USER", "ROLE_ADMIN"})

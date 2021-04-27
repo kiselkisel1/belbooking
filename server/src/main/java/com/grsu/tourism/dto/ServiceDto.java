@@ -22,5 +22,5 @@ public class ServiceDto<S extends AbstractService> {
     private Map<String, String> pictures;
     private List<Stock> stocks;
     private List<OpeningHours> openingHours;
-    private List<Comment> comments;
+    private List<CommentDto> comments;
 }

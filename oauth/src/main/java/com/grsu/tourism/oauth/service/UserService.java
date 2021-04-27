@@ -27,6 +27,11 @@ public class UserService {
         return userRepo.findByEmail(email);
     }
 
+    public UserDto getById(Integer id) {
+        return userRepo.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User with id is not found in the system " + id));
+    }
+
     public String getCurrentUserEmail() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();

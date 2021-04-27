@@ -1,14 +1,14 @@
 package com.grsu.tourism.converter;
 
+import com.grsu.tourism.dto.CommentDto;
 import com.grsu.tourism.dto.ServiceDto;
 import com.grsu.tourism.model.*;
-import com.grsu.tourism.model.user.Comment;
 import com.grsu.tourism.repository.StockRepository;
 import com.grsu.tourism.service.impl.ContactDetailsService;
 import com.grsu.tourism.service.impl.LocationService;
 import com.grsu.tourism.service.impl.OpeningHoursService;
 import com.grsu.tourism.service.impl.PictureService;
-import com.grsu.tourism.service.user.CommentService;
+import com.grsu.tourism.service.user.CommentDtoService;
 import lombok.AllArgsConstructor;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
@@ -28,13 +28,13 @@ public class ServiceConverter implements Converter<AbstractService, ServiceDto> 
     private final PictureService pictureService;
     private final OpeningHoursService openingHoursService;
     private final StockRepository stockRepository;
-    private final CommentService commentService;
+    private final CommentDtoService commentService;
 
     private Map<Integer, List<Location>> locationMap;
     private Map<Integer, List<ContactDetails>> contactDetailsMap;
     private Map<Integer, List<Stock>> stockMap;
     private Map<Integer, List<OpeningHours>> openingHoursMap;
-    private Map<Integer, List<Comment>> commentsMap;
+    private Map<Integer, List<CommentDto>> commentsMap;
 
     @Override
     public ServiceDto convert(AbstractService source) {
