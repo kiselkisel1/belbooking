@@ -29,6 +29,7 @@ create table if not exists booking(
 	`status` VARCHAR(45) not null,
 	`booking_date` DATE,
 	`payment_currency` VARCHAR(45),
+	`service_type` VARCHAR(100),
 	`service_id` INT,
 	`user_id` INT,
 	foreign key (service_id) references service(id)

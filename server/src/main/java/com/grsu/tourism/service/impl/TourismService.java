@@ -2,6 +2,7 @@ package com.grsu.tourism.service.impl;
 
 import com.grsu.tourism.enums.ServiceType;
 import com.grsu.tourism.enums.TourismEnum;
+import com.grsu.tourism.model.Housing;
 import com.grsu.tourism.model.TourProgram;
 import com.grsu.tourism.model.Tourism;
 import com.grsu.tourism.repository.TourismRepository;
@@ -53,6 +54,13 @@ public class TourismService implements GenericService<Tourism> {
     @Override
     public void deleteService(Integer id) {
         tourismRepository.deleteById(id);
+    }
+
+    @Override
+    public void setIsBooked(Integer serviceId) {
+        Tourism service = getById(serviceId);
+        service.setIsBooked(true);
+        saveService(service);
     }
 
     public Tourism saveTourProgram(TourProgram tourProgram, Integer serviceId) {

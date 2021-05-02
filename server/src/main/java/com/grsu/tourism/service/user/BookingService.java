@@ -1,13 +1,15 @@
 package com.grsu.tourism.service.user;
 
+import com.grsu.tourism.enums.ServiceType;
+import com.grsu.tourism.factory.ServiceFactory;
 import com.grsu.tourism.model.Status;
 import com.grsu.tourism.model.user.Booking;
 import com.grsu.tourism.oauth.model.UserDto;
 import com.grsu.tourism.oauth.service.UserService;
 import com.grsu.tourism.repository.BookingRepository;
+import com.grsu.tourism.service.GenericService;
 import com.grsu.tourism.validator.ValidateUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,7 @@ public class BookingService {
     private final BookingRepository bookingRepository;
     private final ValidateUtil validateService;
     private final UserService userService;
+    private final ServiceFactory serviceFactory;
 
     public Booking getById(Integer bookingId) {
         return bookingRepository.findById(bookingId)
@@ -42,6 +45,10 @@ public class BookingService {
 
     public Booking save(Booking booking) {
         validateService.isServiceExists(booking.getServiceId());
+        ServiceType serviceType = ServiceType.getByNameIgnoreCaseOrElseThrow(booking.getServiceType());
+        GenericService genericService = serviceFactory.getServiceByType(serviceType);
+        genericService.setIsBooked(booking.getServiceId());
+
         String email = userService.getCurrentUserEmail();
         UserDto userDto = Optional.ofNullable(userService.getByEmail(email))
                 .orElseThrow(() -> new IllegalArgumentException("User with email is not found in the system " + email));

@@ -53,6 +53,13 @@ public class AttractionService implements GenericService<AbstractService> {
     }
 
     @Override
+    public void setIsBooked(Integer serviceId) {
+        AbstractService service = getById(serviceId);
+        service.setIsBooked(true);
+        saveService(service);
+    }
+
+    @Override
     public ServiceType getType() {
         return ATTRACTIONS;
     }

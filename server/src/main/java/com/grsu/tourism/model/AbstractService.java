@@ -25,7 +25,7 @@ public class AbstractService {
     private String subType;
     private Double price;
     @Column(name = "is_booked")
-    private Boolean isBooked;
+    private Boolean isBooked = Boolean.FALSE;
     @Column(name = "is_active")
-    private Boolean isActive;
+    private Boolean isActive = Boolean.TRUE;
 }
