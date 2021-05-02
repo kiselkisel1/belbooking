@@ -43,12 +43,12 @@ public class AbstractServiceImpl {
     }
 
     public List<AbstractService> getByType(ServiceType type, Pageable pageable) {
-        List<AbstractService> services = Lists.newArrayList(serviceRepository.findByType(type.getName(), pageable));
+        List<AbstractService> services = Lists.newArrayList(serviceRepository.findByTypeAndIsBooked(type.getName(), pageable, true));
         return services;
     }
 
     public List<AbstractService> getByTypeAndSubType(ServiceType type, String subType, Pageable pageable) {
-        List<AbstractService> services = Lists.newArrayList(serviceRepository.findByTypeAndSubType(type.getName(), subType, pageable));
+        List<AbstractService> services = Lists.newArrayList(serviceRepository.findByTypeAndSubTypeAndIsBooked(type.getName(), subType, pageable, true));
         return services;
     }
 

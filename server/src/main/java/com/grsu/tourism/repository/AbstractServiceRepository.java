@@ -10,8 +10,8 @@ import java.util.List;
 @Repository
 public interface AbstractServiceRepository extends PagingAndSortingRepository<AbstractService, Integer> {
 
-    List<AbstractService> findByType(String type, Pageable pageable);
+    List<AbstractService> findByTypeAndIsBooked(String type, Pageable pageable, boolean isBooked);
 
-    List<AbstractService> findByTypeAndSubType(String type, String subType, Pageable pageable);
+    List<AbstractService> findByTypeAndSubTypeAndIsBooked(String type, String subType, Pageable pageable, boolean isBooked);
 
 }

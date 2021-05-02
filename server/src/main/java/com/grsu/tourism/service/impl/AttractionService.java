@@ -25,7 +25,7 @@ public class AttractionService implements GenericService<AbstractService> {
 
     @Override
     public List<AbstractService> getAllByType(Pageable pageable) {
-        return abstractServiceRepository.findByType(ATTRACTIONS.getName(), pageable);
+        return abstractServiceRepository.findByTypeAndIsBooked(ATTRACTIONS.getName(), pageable, true);
     }
 
     @Override
