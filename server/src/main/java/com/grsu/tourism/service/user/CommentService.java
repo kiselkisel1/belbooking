@@ -1,5 +1,6 @@
 package com.grsu.tourism.service.user;
 
+import com.grsu.tourism.enums.ServiceType;
 import com.grsu.tourism.model.user.Comment;
 import com.grsu.tourism.oauth.model.UserDto;
 import com.grsu.tourism.oauth.service.UserService;
@@ -50,6 +51,8 @@ public class CommentService {
     }
 
     public Comment save(Comment comment) {
+        ServiceType serviceType = ServiceType.getByNameIgnoreCaseOrElseThrow(comment.getServiceType());
+
         validateService.isServiceExists(comment.getServiceId());
         String email = userService.getCurrentUserEmail();
         UserDto userDto = Optional.ofNullable(userService.getByEmail(email))

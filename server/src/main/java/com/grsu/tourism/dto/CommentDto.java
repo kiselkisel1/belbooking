@@ -19,6 +19,7 @@ public class CommentDto {
     private String name;
     private String surname;
     private String email;
+    private String serviceType;
 
     private String description;
     private LocalDateTime commentDate;

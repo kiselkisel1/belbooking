@@ -20,6 +20,7 @@ public class Comment {
     private Integer id;
     private Integer serviceId;
     private Integer userId;
+    private String serviceType;
 
     private String description;
     private LocalDateTime commentDate;

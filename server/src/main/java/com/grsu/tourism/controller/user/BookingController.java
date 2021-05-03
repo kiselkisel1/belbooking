@@ -51,7 +51,7 @@ public class BookingController {
         return bookingService.getBookingsForCurrentUser(paging);
     }
 
-    @Secured({"ROLE_ADMIN"})
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @PostMapping("/add")
     @ApiOperation(value = "From json should be removed id and paymentDate,userId,because it will be set by system", authorizations = {@Authorization(value = "jwtToken")})
     public Booking addBooking(@RequestBody Booking booking) {

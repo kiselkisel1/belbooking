@@ -61,6 +61,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
     `description` VARCHAR(400),
     `rating` FLOAT,
     `comment_date` DATE NOT NULL,
+    `service_type` VARCHAR(100),
     `service_id` INT,
     `user_id` INT,
 
