@@ -2,7 +2,6 @@ package com.grsu.tourism.service.impl;
 
 import com.grsu.tourism.enums.HousingEnum;
 import com.grsu.tourism.enums.ServiceType;
-import com.grsu.tourism.model.AbstractService;
 import com.grsu.tourism.model.Housing;
 import com.grsu.tourism.repository.HousingRepository;
 import com.grsu.tourism.service.GenericService;
@@ -27,14 +26,14 @@ public class HousingService implements GenericService<Housing> {
 
     @Override
     public List<Housing> getAllByType(Pageable pageable) {
-        return housingRepository.findByType(HOUSING.getName(), pageable);
+        return housingRepository.findByTypeAndIsBooked(HOUSING.getName(), pageable,false);
     }
 
     @Override
     public List<Housing> getAllByTypeAndSubType(String subType, Pageable pageable) {
 
         HousingEnum.getByNameIgnoreCaseOrElseThrow(subType);
-        return housingRepository.findByTypeAndSubType(HOUSING.getName(), subType, pageable);
+        return housingRepository.findByTypeAndSubTypeAndIsBooked(HOUSING.getName(), subType, pageable,false);
     }
 
     @Override

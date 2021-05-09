@@ -13,8 +13,8 @@ public interface TransportRepository extends PagingAndSortingRepository<Transpor
 
     List<Transport> findByIdIn(Collection<Integer> serviceIds);
 
-    List<Transport> findByType(String type, Pageable pageable);
+    List<Transport> findByTypeAndIsBooked(String type, Pageable pageable, boolean isBooked);
 
-    List<Transport> findByTypeAndSubType(String type, String subType, Pageable pageable);
+    List<Transport> findByTypeAndSubTypeAndIsBooked(String type, String subType, Pageable pageable, boolean isBooked);
 
 }

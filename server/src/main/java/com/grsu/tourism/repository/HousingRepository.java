@@ -13,8 +13,8 @@ public interface HousingRepository extends PagingAndSortingRepository<Housing, I
 
     List<Housing> findByIdIn(Collection<Integer> serviceIds);
 
-    List<Housing> findByType(String type, Pageable pageable);
+    List<Housing> findByTypeAndIsBooked(String type, Pageable pageable, boolean isBooked);
 
-    List<Housing> findByTypeAndSubType(String type, String subType, Pageable pageable);
+    List<Housing> findByTypeAndSubTypeAndIsBooked(String type, String subType, Pageable pageable, boolean isBooked);
 
 }

@@ -25,14 +25,14 @@ public class TransportService implements GenericService<Transport> {
 
     @Override
     public List<Transport> getAllByType(Pageable pageable) {
-        return transportRepository.findByType(TRANSPORT.getName(), pageable);
+        return transportRepository.findByTypeAndIsBooked(TRANSPORT.getName(), pageable,false);
     }
 
     @Override
     public List<Transport> getAllByTypeAndSubType(String subType, Pageable pageable) {
 
         TransportEnum.getByNameIgnoreCaseOrElseThrow(subType);
-        return transportRepository.findByTypeAndSubType(TRANSPORT.getName(), subType, pageable);
+        return transportRepository.findByTypeAndSubTypeAndIsBooked(TRANSPORT.getName(), subType, pageable,false);
     }
 
     @Override

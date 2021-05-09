@@ -13,7 +13,7 @@ public interface TourismRepository extends PagingAndSortingRepository<Tourism, I
 
     List<Tourism> findByIdIn(Collection<Integer> serviceIds);
 
-    List<Tourism> findByType(String type, Pageable pageable);
+    List<Tourism> findByTypeAndIsBooked(String type, Pageable pageable, boolean isBooked);
 
-    List<Tourism> findByTypeAndSubType(String type, String subType, Pageable pageable);
+    List<Tourism> findByTypeAndSubTypeAndIsBooked(String type, String subType, Pageable pageable, boolean isBooked);
 }

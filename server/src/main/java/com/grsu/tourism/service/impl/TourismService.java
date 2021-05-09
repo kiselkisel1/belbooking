@@ -28,14 +28,14 @@ public class TourismService implements GenericService<Tourism> {
 
     @Override
     public List<Tourism> getAllByType(Pageable pageable) {
-        return tourismRepository.findByType(TOURISM.getName(), pageable);
+        return tourismRepository.findByTypeAndIsBooked(TOURISM.getName(), pageable,false);
     }
 
     @Override
     public List<Tourism> getAllByTypeAndSubType(String subType, Pageable pageable) {
 
         TourismEnum.getByNameIgnoreCaseOrElseThrow(subType);
-        return tourismRepository.findByTypeAndSubType(TOURISM.getName(), subType, pageable);
+        return tourismRepository.findByTypeAndSubTypeAndIsBooked(TOURISM.getName(), subType, pageable,false);
     }
 
     @Override

@@ -32,7 +32,7 @@ public class AttractionService implements GenericService<AbstractService> {
     public List<AbstractService> getAllByTypeAndSubType(String subType, Pageable pageable) {
         AttractionsEnum.getByNameIgnoreCaseOrElseThrow(subType);
 
-        return abstractServiceRepository.findByTypeAndSubType(ATTRACTIONS.getName(), subType, pageable);
+        return abstractServiceRepository.findByTypeAndSubTypeAndIsBooked(ATTRACTIONS.getName(), subType, pageable,false);
     }
 
     @Override
