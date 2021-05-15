@@ -24,6 +24,7 @@ public class CommentDtoConverter implements Converter<Comment, CommentDto> {
                 .serviceId(source.getServiceId())
                 .email(userDto.getEmail())
                 .name(userDto.getName())
+                .serviceType(source.getServiceType())
                 .surname(userDto.getSurname())
                 .build();
         return commentDto;
