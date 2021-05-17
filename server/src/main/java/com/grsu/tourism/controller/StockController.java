@@ -20,7 +20,6 @@ import java.util.List;
 public class StockController {
     private final StockService stockService;
 
-    //TODO check if beginDate is today or next day but not date that is old
     @GetMapping("/get")
     public List<StockDto> getStocks(@RequestParam(defaultValue = "0") Integer pageNumber,
                                     @RequestParam(defaultValue = "10") Integer pageSize,

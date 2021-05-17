@@ -56,9 +56,9 @@ public class HousingService implements GenericService<Housing> {
     }
 
     @Override
-    public void setIsBooked(Integer serviceId) {
+    public void setIsBooked(Integer serviceId, Boolean value) {
         Housing service = getById(serviceId);
-        service.setIsBooked(true);
+        service.setIsBooked(value);
         saveService(service);
     }
 

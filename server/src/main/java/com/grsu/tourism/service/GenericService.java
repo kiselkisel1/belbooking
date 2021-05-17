@@ -18,7 +18,7 @@ public interface GenericService<S extends AbstractService> {
 
     void deleteService(Integer id);
 
-    void setIsBooked(Integer serviceId);
+    void setIsBooked(Integer serviceId, Boolean value);
 
     ServiceType getType();
 }

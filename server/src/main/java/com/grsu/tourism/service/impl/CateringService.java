@@ -53,7 +53,7 @@ public class CateringService implements GenericService<Catering> {
     }
 
     @Override
-    public void setIsBooked(Integer serviceId) {
+    public void setIsBooked(Integer serviceId, Boolean value) {
 
     }
 

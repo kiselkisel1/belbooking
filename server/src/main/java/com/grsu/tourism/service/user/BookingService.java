@@ -47,7 +47,7 @@ public class BookingService {
         validateService.isServiceExists(booking.getServiceId());
         ServiceType serviceType = ServiceType.getByNameIgnoreCaseOrElseThrow(booking.getServiceType());
         GenericService genericService = serviceFactory.getServiceByType(serviceType);
-        genericService.setIsBooked(booking.getServiceId());
+        genericService.setIsBooked(booking.getServiceId(), true);
 
         String email = userService.getCurrentUserEmail();
         UserDto userDto = Optional.ofNullable(userService.getByEmail(email))
@@ -74,6 +74,12 @@ public class BookingService {
     }
 
     public void delete(Integer id) {
+        Booking booking = getById(id);
+        ServiceType type = ServiceType.getByNameIgnoreCaseOrElseThrow(booking.getServiceType());
+        GenericService genericService = serviceFactory.getServiceByType(type);
+        genericService.setIsBooked(booking.getServiceId(), false);
+
         bookingRepository.deleteById(id);
+
     }
 }

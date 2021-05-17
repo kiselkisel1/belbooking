@@ -53,9 +53,9 @@ public class AttractionService implements GenericService<AbstractService> {
     }
 
     @Override
-    public void setIsBooked(Integer serviceId) {
+    public void setIsBooked(Integer serviceId, Boolean value) {
         AbstractService service = getById(serviceId);
-        service.setIsBooked(true);
+        service.setIsBooked(value);
         saveService(service);
     }
 

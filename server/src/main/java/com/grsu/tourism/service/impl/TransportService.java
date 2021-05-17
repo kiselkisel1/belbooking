@@ -2,7 +2,6 @@ package com.grsu.tourism.service.impl;
 
 import com.grsu.tourism.enums.ServiceType;
 import com.grsu.tourism.enums.TransportEnum;
-import com.grsu.tourism.model.Housing;
 import com.grsu.tourism.model.Transport;
 import com.grsu.tourism.repository.TransportRepository;
 import com.grsu.tourism.service.GenericService;
@@ -53,9 +52,9 @@ public class TransportService implements GenericService<Transport> {
     }
 
     @Override
-    public void setIsBooked(Integer serviceId) {
+    public void setIsBooked(Integer serviceId, Boolean value) {
         Transport service = getById(serviceId);
-        service.setIsBooked(true);
+        service.setIsBooked(value);
         saveService(service);
     }
 

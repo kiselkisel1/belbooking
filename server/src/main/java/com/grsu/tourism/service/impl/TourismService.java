@@ -57,9 +57,9 @@ public class TourismService implements GenericService<Tourism> {
     }
 
     @Override
-    public void setIsBooked(Integer serviceId) {
+    public void setIsBooked(Integer serviceId, Boolean value) {
         Tourism service = getById(serviceId);
-        service.setIsBooked(true);
+        service.setIsBooked(value);
         saveService(service);
     }
 
